@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - M Adam Raya
 
 ## Domain Proyek
 Perkembangan teknologi dan ketersediaan data dalam jumlah besar telah membuka peluang besar dalam penerapan machine learning di berbagai bidang, termasuk sektor keuangan. Salah satu tantangan penting di sektor ini adalah kemampuan untuk memprediksi pergerakan harga atau tren pasar berdasarkan data historis. Prediksi yang akurat tidak hanya membantu investor dalam mengambil keputusan strategis, tetapi juga mendukung perusahaan dalam merancang kebijakan manajemen risiko yang lebih baik.
