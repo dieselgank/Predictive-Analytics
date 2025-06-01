@@ -73,6 +73,20 @@ Dari hasil yang ditampilkan, data tidak ada yang bernilai duplikat atau ganda pa
 
 Terlihat dari visualisasi boxplot diatas, fitur numerik dari kolom Volume memiliki outliers.
 
+Selanjutnya adalah mengatasi outliers tersebut dengan metode IQR. Kita akan menggunakan metode IQR untuk mengidentifikasi outlier yang berada di luar Q1 dan Q3. Nilai apa pun yang berada di luar batas ini dianggap sebagai outlier.
+
+![image](https://github.com/user-attachments/assets/99eec40c-9b41-4efa-a7af-42733285fb35)
+
+Berikut hasilnya
+
+![image](https://github.com/user-attachments/assets/7a0f1736-2f8a-4e6b-a693-ad0bbf899c0e)
+
+Pada kolom 'Volume', dilakukan analisis outlier menggunakan metode Interquartile Range (IQR). Nilai Q1 (kuartil pertama) adalah 11.299.738, yang berarti 25% data memiliki nilai lebih kecil dari angka ini. Sementara itu, Q3 (kuartil ketiga) adalah 20.001.134, artinya 75% data memiliki nilai lebih kecil dari angka tersebut. Selisih antara Q3 dan Q1 disebut IQR, yang dalam hal ini sebesar 8.701.396.
+
+Berdasarkan metode IQR, batas bawah untuk mendeteksi outlier adalah Q1 - 1.5 × IQR, yang menghasilkan nilai -1.752.356. Karena volume tidak mungkin bernilai negatif, tidak ditemukan outlier pada sisi bawah. Sedangkan batas atas ditentukan dari Q3 + 1.5 × IQR, yaitu 33.053.228. Setiap nilai volume yang melebihi batas atas ini dianggap sebagai outlier atas.
+
+Dari hasil perhitungan, ditemukan sebanyak 66 baris data yang memiliki nilai volume melebihi batas atas tersebut. Dengan demikian, dapat disimpulkan bahwa terdapat 66 outlier pada kolom 'Volume', yang semuanya merupakan outlier atas.
+
 ## Uraian seluruh fitur pada data
 ### Variabel pada dataset adalah sebagai berikut:
 | Kolom       | Deskripsi                                                                         |
