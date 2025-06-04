@@ -43,7 +43,7 @@ Infromasi dataset tersebut dapat dilihat pada gambar dibawah ini:
 
 ### Jumlah Baris dan Kolom
 
-![image](https://github.com/user-attachments/assets/72f313c2-25b5-4f54-a226-a86f229c6668)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/Screenshot%20from%202025-06-04%2016-44-55.png)
 
 Dari tabel diatas terdapat 1505 baris dan 7 kolom pada dataset.
 
@@ -88,7 +88,7 @@ Terlihat dari visualisasi boxplot diatas, fitur numerik dari kolom Volume memili
 ### Exploratory Data Analysis - Univariate Analysis
 #### Fitur Numerik
 
-![image](https://github.com/user-attachments/assets/e1d60487-753c-4b47-badc-0b9d848a7b75)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/download%20(3).png)
 
 Berdasarkan grafik distribusi data dari numerical_feature yang ditampilkan, dapat dilihat bahwa :
 1. Rentang nilai dari setiap variabel (Open, High, Low, Close) memiliki rentang nilai yang serupa, yaitu 40.000 hingga 90.000. Namun pada Adj_Close berkisar 30.000 hingga 80.000, sedangkan Volume berkisar 0 sampai 35.000.000.
@@ -97,7 +97,7 @@ Berdasarkan grafik distribusi data dari numerical_feature yang ditampilkan, dapa
 
 #### Fitur Datetime
 
-![image](https://github.com/user-attachments/assets/1afe3b86-b7ab-4adb-a0e8-f9705d078a45)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/download%20(4).png)
 
 Berdasarkan grafik dari jumlah data per tahun , dapat disimpulkan bahwa :
 - 2019 terdapat 246 data
@@ -111,7 +111,7 @@ Berdasarkan grafik dari jumlah data per tahun , dapat disimpulkan bahwa :
 ### Exploratory Data Analysis - Multivariate Analysis
 #### Melihat korelasi variabel numerik dengan menggunakan Heatmap
 
-![image](https://github.com/user-attachments/assets/ce9ba542-d6b7-45f6-acf5-726756bb0522)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/download%20(6).png)
 
 Berdasarkan gambar diatas, terlihat bahwa :
 1. Fitur Open, High, Low, Close, Adj Close punya korelasi mendekati 1, artinya mereka mengandung informasi yang hampir sama.
@@ -119,7 +119,7 @@ Berdasarkan gambar diatas, terlihat bahwa :
 
 #### visualisasi time series
 
-![image](https://github.com/user-attachments/assets/fd5cbe54-f125-42df-87c1-17af3bc8f62e)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/download%20(7).png)
 
 Dari tahun 2018 hingga awal 2021, terlihat tren kenaikan harga saham yang signifikan, terutama lonjakan tajam di akhir 2020 hingga awal 2021. Setelah mencapai puncak di awal 2021 (~90.000), harga mulai mengalami fluktuasi dan penurunan bertahap.
 
@@ -233,47 +233,29 @@ Berikut merupakan akurasi yang didapat oleh Logistic Regresion
 ## Evaluation
 ### Menghitung metrik precision, recall, F1-score, dan support.
 
-![image](https://github.com/user-attachments/assets/c36208dc-ba27-4392-9a60-ce3b3c2567e1)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/Screenshot%20from%202025-06-04%2016-25-40.png)
 
 Berdasarkan hasil evaluasi performa model, Random Forest menunjukkan kinerja yang secara signifikan lebih baik dibandingkan Logistic Regression. Model Random Forest menghasilkan akurasi sebesar 96%, dengan nilai precision, recall, dan f1-score yang tinggi dan konsisten di semua kelas, termasuk kelas dengan jumlah data yang sedikit. Sebaliknya, Logistic Regression hanya mencapai akurasi 80%, dengan performa yang cenderung menurun drastis pada beberapa kelas, terutama pada kelas minoritas. Oleh karena itu, dapat disimpulkan bahwa Random Forest lebih tepat digunakan untuk kasus klasifikasi ini karena mampu menangani kompleksitas data dengan lebih baik dan memberikan hasil yang lebih andal.
 
-Berikut merupakan rumus perhitungan dari metrik-metrik yang ditampilkan pada hasil evaluasi performa
+Berikut merupakan kesimpulan dari metrik-metrik yang ditampilkan pada hasil evaluasi performa
 
-1. Precision
-
-Presisi mengukur seberapa akurat prediksi positif model. Artinya, dari semua prediksi yang diklaim positif, berapa banyak yang benar-benar positif.
-
-![image](https://github.com/user-attachments/assets/2fee8666-45a1-4ffe-aa28-22a6ffa0bca3)
-
-2. Recall
-
-Recall mengukur seberapa baik model menemukan semua kasus positif yang sebenarnya. Dari semua data yang benar-benar positif, berapa banyak yang berhasil ditemukan model.
-
-![image](https://github.com/user-attachments/assets/5b44587a-fefa-4250-ae32-abb8a724f522)
-
-3. F1-Score
-
-F1-score adalah harmonic mean dari precision dan recall. Ini berguna jika kita ingin keseimbangan antara precision dan recall, terutama saat data tidak seimbang.
-
-![image](https://github.com/user-attachments/assets/c0c226e0-4da1-4e1c-951d-9e3a2d9c5c87)
-
-4. Support
-
-Support adalah jumlah data aktual (ground truth) untuk setiap kelas. Ini hanya menunjukkan berapa banyak sampel dari setiap kelas dalam data.
-
-5. Accuracy
-
-Akurasi adalah metrik evaluasi yang mengukur proporsi prediksi yang benar dibandingkan dengan total keseluruhan prediksi.
-
-![image](https://github.com/user-attachments/assets/67b7f97e-cb0a-4dd4-8b53-60f5cc21c8dd)
+1. Random Forest
+    - Memberikan hasil terbaik di seluruh metrik evaluasi: accuracy, precision, recall, dan F1-score.
+    - Menunjukkan kinerja yang stabil pada semua kelas, termasuk kelas minoritas (2025) dengan F1-score yang tetap tinggi (0.92).
+    - Cocok digunakan untuk dataset dengan distribusi kelas yang tidak seimbang, karena mampu mengenali pola dari kelas kecil maupun besar dengan baik.
+    - Akurasi total mencapai 96%, yang menunjukkan performa sangat tinggi.
+2. Logistic Regression
+    - Memiliki akurasi lebih rendah (80%) dibandingkan Random Forest.
+    - Kinerja model kurang stabil, dengan penurunan signifikan pada kelas minoritas (F1-score kelas 2025 hanya 0.45).
+    - Lebih cocok untuk dataset yang seimbang, dan mungkin memerlukan penyesuaian (seperti oversampling/undersampling) jika digunakan pada data yang tidak seimbang.
+    - Secara keseluruhan, performanya tidak sebaik Random Forest untuk kasus ini.
 
 ### Melihat perbandingan akurasi model dengan grafik barplot
 
-![image](https://github.com/user-attachments/assets/4fd6f46f-d8db-4aaf-be0b-82254f5fecaf)
+![image](https://raw.githubusercontent.com/dieselgank/Media/refs/heads/main/download%20(2).png)
 
 Dari grafik barplot yang ditampilkan, terlihat bahwa model menggunakan algoritma Random Forest lebih tinggi akurasinya yakni 0.9571 dibandingkan dengan model yakni Naive Bayes = 0.7964 untuk memprediksi harga saham setiap tahun.
 
 ## Referensi
 1. Permana, N. A., & Bunyamin, H. (2024). Perbandingan Logistic Regression dengan Random Forest dalam Memprediksi Sentimen Pada IMDb Moview Review. Jurnal STRATEGI-Jurnal Maranatha, 6(2), 391-399.
 2. Febriyanti, N. R., Kusrini, K., & Hartanto, A. D. (2025). Analisis Perbandingan Algoritma SVM, Random Forest dan Logistic Regression untuk Prediksi Stunting Balita. Edumatic: Jurnal Pendidikan Informatika, 9(1), 149-158.
-
