@@ -73,20 +73,6 @@ Dari hasil yang ditampilkan, data tidak ada yang bernilai duplikat atau ganda pa
 
 Terlihat dari visualisasi boxplot diatas, fitur numerik dari kolom Volume memiliki outliers.
 
-Selanjutnya adalah mengatasi outliers tersebut dengan metode IQR. Kita akan menggunakan metode IQR untuk mengidentifikasi outlier yang berada di luar Q1 dan Q3. Nilai apa pun yang berada di luar batas ini dianggap sebagai outlier.
-
-![image](https://github.com/user-attachments/assets/99eec40c-9b41-4efa-a7af-42733285fb35)
-
-Berikut hasilnya
-
-![image](https://github.com/user-attachments/assets/7a0f1736-2f8a-4e6b-a693-ad0bbf899c0e)
-
-Pada kolom 'Volume', dilakukan analisis outlier menggunakan metode Interquartile Range (IQR). Nilai Q1 (kuartil pertama) adalah 11.299.738, yang berarti 25% data memiliki nilai lebih kecil dari angka ini. Sementara itu, Q3 (kuartil ketiga) adalah 20.001.134, artinya 75% data memiliki nilai lebih kecil dari angka tersebut. Selisih antara Q3 dan Q1 disebut IQR, yang dalam hal ini sebesar 8.701.396.
-
-Berdasarkan metode IQR, batas bawah untuk mendeteksi outlier adalah Q1 - 1.5 × IQR, yang menghasilkan nilai -1.752.356. Karena volume tidak mungkin bernilai negatif, tidak ditemukan outlier pada sisi bawah. Sedangkan batas atas ditentukan dari Q3 + 1.5 × IQR, yaitu 33.053.228. Setiap nilai volume yang melebihi batas atas ini dianggap sebagai outlier atas.
-
-Dari hasil perhitungan, ditemukan sebanyak 66 baris data yang memiliki nilai volume melebihi batas atas tersebut. Dengan demikian, dapat disimpulkan bahwa terdapat 66 outlier pada kolom 'Volume', yang semuanya merupakan outlier atas.
-
 ## Uraian seluruh fitur pada data
 ### Variabel pada dataset adalah sebagai berikut:
 | Kolom       | Deskripsi                                                                         |
@@ -139,6 +125,34 @@ Dari tahun 2018 hingga awal 2021, terlihat tren kenaikan harga saham yang signif
 
 ## Data Preparation
 Pada tahap ini kita akan melakukan proses transformasi pada data sehingga menjadi bentuk yang cocok untuk proses pemodelan. Ada beberapa tahap persiapan data perlu dilakukan, yaitu :
+
+### Hapus Outlier
+Kita akan menggunakan metode IQR untuk mengidentifikasi outlier yang berada di luar Q1 dan Q3. Nilai apa pun yang berada di luar batas ini dianggap sebagai outlier.
+
+![image](https://github.com/user-attachments/assets/99eec40c-9b41-4efa-a7af-42733285fb35)
+
+Berikut hasilnya
+
+![image](https://github.com/user-attachments/assets/7a0f1736-2f8a-4e6b-a693-ad0bbf899c0e)
+
+Pada kolom 'Volume', dilakukan analisis outlier menggunakan metode Interquartile Range (IQR). Nilai Q1 (kuartil pertama) adalah 11.299.738, yang berarti 25% data memiliki nilai lebih kecil dari angka ini. Sementara itu, Q3 (kuartil ketiga) adalah 20.001.134, artinya 75% data memiliki nilai lebih kecil dari angka tersebut. Selisih antara Q3 dan Q1 disebut IQR, yang dalam hal ini sebesar 8.701.396.
+
+Berdasarkan metode IQR, batas bawah untuk mendeteksi outlier adalah Q1 - 1.5 × IQR, yang menghasilkan nilai -1.752.356. Karena volume tidak mungkin bernilai negatif, tidak ditemukan outlier pada sisi bawah. Sedangkan batas atas ditentukan dari Q3 + 1.5 × IQR, yaitu 33.053.228. Setiap nilai volume yang melebihi batas atas ini dianggap sebagai outlier atas.
+
+Dari hasil perhitungan, ditemukan sebanyak 66 baris data yang memiliki nilai volume melebihi batas atas tersebut. Dengan demikian, dapat disimpulkan bahwa terdapat 66 outlier pada kolom 'Volume', yang semuanya merupakan outlier atas.
+
+### Rename
+![image](https://github.com/user-attachments/assets/e3626491-2469-4749-986a-abb1a4e69847)
+
+Baris kode ini akan membuat DataFrame baru (yang kemudian ditugaskan kembali ke variabel df) di mana kolom yang sebelumnya bernama 'Adj Close' sekarang bernama 'Adj_Close'. Kolom-kolom lainnya akan tetap sama namanya.
+
+### Konversi tipe data
+![image](https://github.com/user-attachments/assets/2ab963c8-acca-4416-bffd-13e3e8236d65)
+
+- Mengekstraksi Tahun: Baris kode `df['Year'] = df['Date'].dt.year` mengambil nilai tahun dari setiap entri di kolom Date dan menyimpannya ke dalam kolom baru bernama Year. Atribut .dt memungkinkan mengakses komponen-komponen datetime seperti tahun, bulan, hari, dll.
+
+- Mengekstraksi Bulan: Baris kode `df['Month'] = df['Date'].dt.month` melakukan hal yang serupa, tetapi mengekstrak nilai bulan dari kolom Date dan menyimpannya ke dalam kolom baru bernama Month.
+
 ### Drop Kolom
 Menghapus kolom pada dataset yang tidak perlu digunakan dalam pemrosesan data yakni Date. Kolom ini akan dihapus menggunakan fungsi drop()
 
@@ -176,6 +190,8 @@ Gambar diatas adalah hasil pembagian dataset, berikut merupakan penjelasannya :
 Pada tahap ini, kita akan mengembangkan model machine learning dengan dua algoritma. Kemudian, kita akan mengevaluasi performa masing-masing algoritma dan menentukan algoritma mana yang memberikan hasil prediksi terbaik.
 
 ### Random Forest
+Cara kerja algoritma ini dengan cara menggabungkan hasil dari banyak pohon keputusan (decision trees). Ide dasarnya adalah membuat banyak pohon keputusan yang 'lemah' secara individual, dan kemudian menggabungkan prediksi mereka untuk mendapatkan prediksi yang lebih kuat dan stabil.
+
 Langkah pertama kita melatih model dengan algoritma random forest dengan memanggil fungsi RandomForestClassifier. Parameter yang digunakan yaitu:
 - `n_estimator`: jumlah trees (pohon) di forest. Di sini kita set n_estimator=50.
 - `max_depth`: kedalaman atau panjang pohon. Ia merupakan ukuran seberapa banyak pohon dapat membelah (splitting) untuk membagi setiap node ke dalam jumlah pengamatan yang diinginkan.
@@ -189,6 +205,9 @@ Berikut merupakan akurasi yang didapat oleh Random Forest
 
 
 ### Logistic Regression
+
+Logistic Regression pada submission ini memodelkan hubungan linier antara fitur-fitur harga/volume dan kemungkinan suatu data point (hari) termasuk dalam tahun tertentu, menggunakan fungsi softmax untuk mengubah skor linier menjadi probabilitas dan memilih tahun dengan probabilitas tertinggi sebagai prediksi.
+
 Langkah kedua kita melatih model dengan algoritma logistic regression dengan memanggil fungsi LogisticRegression. Parameter yang digunakan yaitu:
 
 `penalty='l2'` : jenis regularisasi yang digunakan. 'l2' berarti menggunakan L2 regularization (juga disebut Ridge), yang akan menambahkan penalti terhadap besar koefisien agar model tidak overfitting.
