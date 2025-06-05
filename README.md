@@ -126,6 +126,18 @@ Dari tahun 2018 hingga awal 2021, terlihat tren kenaikan harga saham yang signif
 ## Data Preparation
 Pada tahap ini kita akan melakukan proses transformasi pada data sehingga menjadi bentuk yang cocok untuk proses pemodelan. Ada beberapa tahap persiapan data perlu dilakukan, yaitu :
 
+### Konversi tipe data
+![image](https://github.com/user-attachments/assets/2ab963c8-acca-4416-bffd-13e3e8236d65)
+
+- Mengekstraksi Tahun: Baris kode `df['Year'] = df['Date'].dt.year` mengambil nilai tahun dari setiap entri di kolom Date dan menyimpannya ke dalam kolom baru bernama Year. Atribut .dt memungkinkan mengakses komponen-komponen datetime seperti tahun, bulan, hari, dll.
+
+- Mengekstraksi Bulan: Baris kode `df['Month'] = df['Date'].dt.month` melakukan hal yang serupa, tetapi mengekstrak nilai bulan dari kolom Date dan menyimpannya ke dalam kolom baru bernama Month.
+
+### Rename
+![image](https://github.com/user-attachments/assets/e3626491-2469-4749-986a-abb1a4e69847)
+
+Baris kode ini akan membuat DataFrame baru (yang kemudian ditugaskan kembali ke variabel df) di mana kolom yang sebelumnya bernama 'Adj Close' sekarang bernama 'Adj_Close'. Kolom-kolom lainnya akan tetap sama namanya.
+
 ### Hapus Outlier
 Kita akan menggunakan metode IQR untuk mengidentifikasi outlier yang berada di luar Q1 dan Q3. Nilai apa pun yang berada di luar batas ini dianggap sebagai outlier.
 
@@ -140,18 +152,6 @@ Pada kolom 'Volume', dilakukan analisis outlier menggunakan metode Interquartile
 Berdasarkan metode IQR, batas bawah untuk mendeteksi outlier adalah Q1 - 1.5 × IQR, yang menghasilkan nilai -1.752.356. Karena volume tidak mungkin bernilai negatif, tidak ditemukan outlier pada sisi bawah. Sedangkan batas atas ditentukan dari Q3 + 1.5 × IQR, yaitu 33.053.228. Setiap nilai volume yang melebihi batas atas ini dianggap sebagai outlier atas.
 
 Dari hasil perhitungan, ditemukan sebanyak 66 baris data yang memiliki nilai volume melebihi batas atas tersebut. Dengan demikian, dapat disimpulkan bahwa terdapat 66 outlier pada kolom 'Volume', yang semuanya merupakan outlier atas.
-
-### Rename
-![image](https://github.com/user-attachments/assets/e3626491-2469-4749-986a-abb1a4e69847)
-
-Baris kode ini akan membuat DataFrame baru (yang kemudian ditugaskan kembali ke variabel df) di mana kolom yang sebelumnya bernama 'Adj Close' sekarang bernama 'Adj_Close'. Kolom-kolom lainnya akan tetap sama namanya.
-
-### Konversi tipe data
-![image](https://github.com/user-attachments/assets/2ab963c8-acca-4416-bffd-13e3e8236d65)
-
-- Mengekstraksi Tahun: Baris kode `df['Year'] = df['Date'].dt.year` mengambil nilai tahun dari setiap entri di kolom Date dan menyimpannya ke dalam kolom baru bernama Year. Atribut .dt memungkinkan mengakses komponen-komponen datetime seperti tahun, bulan, hari, dll.
-
-- Mengekstraksi Bulan: Baris kode `df['Month'] = df['Date'].dt.month` melakukan hal yang serupa, tetapi mengekstrak nilai bulan dari kolom Date dan menyimpannya ke dalam kolom baru bernama Month.
 
 ### Drop Kolom
 Menghapus kolom pada dataset yang tidak perlu digunakan dalam pemrosesan data yakni Date. Kolom ini akan dihapus menggunakan fungsi drop()
